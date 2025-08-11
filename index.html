@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Master - Interactive Quiz Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <video autoplay loop muted plays-inline>  
+        <source src="C:\Users\VAISHNAVI\OneDrive\Documents\vid.mp4" type="video/mp4">
+     </video>
+    <div id="loginScreen" class="screen active">
+        <div class="background-animation">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+        </div>
+        <div class="login-container">
+            <div class="login-card">
+                <div class="logo-container">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <h1>Quiz Master</h1>
+                    <p class="subtitle">Test your knowledge across multiple categories</p>
+                </div>
+                <form id="loginForm" class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Enter your username" required>
+                        <span class="input-highlight"></span>
+                    </div>
+                    <button type="submit" class="login-btn">
+                        <span>Start Quiz Adventure</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Menu Screen -->
+    <div id="mainScreen" class="screen">
+        <div class="main-background">
+            <div class="welcome-header">
+                <h2>Welcome, <span id="playerName"></span>!</h2>
+                <p>Choose your quiz category</p>
+            </div>
+            <div class="rotating-container">
+                <div class="center-logo">
+                    <i class="fas fa-brain"></i>
+                    <p>Quiz Master</p>
+                </div>
+                <div class="card-circle">
+                    <div class="quiz-card" data-category="music">
+                        <i class="fas fa-music"></i>
+                        <h3>Music</h3>
+                        <p>Test your musical knowledge</p>
+                    </div>
+                    <div class="quiz-card" data-category="games">
+                        <i class="fas fa-gamepad"></i>
+                        <h3>Games</h3>
+                        <p>Gaming trivia awaits</p>
+                    </div>
+                    <div class="quiz-card" data-category="general">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>General Knowledge</h3>
+                        <p>Test your intellect</p>
+                    </div>
+                    <div class="quiz-card" data-category="movies">
+                        <i class="fas fa-film"></i>
+                        <h3>Movies</h3>
+                        <p>Cinema knowledge quiz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Screen -->
+     
+    <div id="quizScreen" class="screen">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                    <span class="question-counter">Question <span id="currentQuestion">1</span> of 5</span>
+                </div>
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <svg class="timer-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" class="timer-bg"></circle>
+                            <circle cx="50" cy="50" r="45" class="timer-progress" id="timerProgress"></circle>
+                        </svg>
+                        <div class="timer-text" id="timerText">30</div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="category-badge" id="categoryBadge">
+                    <i class="category-icon" id="categoryIcon"></i>
+                    <span id="categoryName"></span>
+                </div>
+                <div class="question-container">
+                    <h2 class="question-text" id="questionText"></h2>
+                </div>
+                <div class="options-container" id="optionsContainer">
+                    <!-- Options will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="screen">
+        <div class="results-container">
+            <div class="results-card">
+                <div class="trophy-container" id="trophyContainer">
+                    <i class="fas fa-trophy trophy-icon"></i>
+                </div>
+                <h2>Quiz Complete!</h2>
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span class="score-text" id="finalScore">0</span>
+                        <span class="score-total">/ 5</span>
+                    </div>
+                </div>
+                <div class="score-details">
+                    <div class="score-stat">
+                        <i class="fas fa-check-circle correct-icon"></i>
+                        <span>Correct: <span id="correctCount">0</span></span>
+                    </div>
+                    <div class="score-stat">
+                        <i class="fas fa-times-circle wrong-icon"></i>
+                        <span>Wrong: <span id="wrongCount">0</span></span>
+                    </div>
+                </div>
+                <div class="results-buttons">
+                    <button class="btn btn-primary" id="playAgainBtn">
+                        <i class="fas fa-redo"></i>
+                        Play Again
+                    </button>
+                    <button class="btn btn-secondary" id="backToMenuBtn">
+                        <i class="fas fa-home"></i>
+                        Main Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="correctSound" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+    </audio>
+    <audio id="wrongSound" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/fail-buzzer-02.wav" type="audio/wav">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
